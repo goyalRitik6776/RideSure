@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { UberContext } from '../context/uberContext'
 // import Search from './Search'
 import Home from '../pages'
+import RideSelector from './RideSelector'
 // import { useState } from 'react'
 // const [newStyle, setStyle] = useState("style");
 // setStyle = ""

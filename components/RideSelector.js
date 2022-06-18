@@ -4,16 +4,16 @@ import { useEffect, useContext, useState } from 'react'
 import { UberContext } from '../context/uberContext'
 
 const style = {
-  wrapper: `h-full flex flex-col no-scrollbar`,
-  title: `text-gray-500 text-center text-xs py-2 border-b overflow-scroll no-scrollbar`,
-  carList: `flex flex-col flex-1 overflow-scroll no-scrollbar`,
+  wrapper: `h-full flex flex-col overflow-auto no-scrollbar`,
+  title: `text-gray-500 text-center text-xs py-2 border-b`,
   car: `flex p-3 m-2 items-center border-2 border-white overflow-scroll no-scrollbar`,
-  selectedCar: `border-2 border-black flex p-3 m-2 items-center overflow-scroll no-scrollbar`,
+  selectedCar: `border-2 border-black flex p-3 m-2 items-center `,
+  carList:`overflow-scroll no-scrollbar`,
   carImage: `h-14`,
   carDetails: `ml-2 flex-1`,
   service: `font-medium`,
   time: `text-xs text-blue-500`,
-  priceContainer: `flex items-center overflow-scroll no-scrollbar`,
+  priceContainer: `flex items-center`,
   price: `mr-[-0.8rem]`,
 }
 
