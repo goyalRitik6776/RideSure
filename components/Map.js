@@ -3,8 +3,10 @@ import mapboxgl from 'mapbox-gl'
 import { UberContext } from '../context/uberContext'
 // import MapBoxDirections from '@mapbox/mapbox-gl-directions'
 // var MapboxDirections = require('@mapbox/mapbox-gl-directions');
+// import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
+// import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 const style = {
-  wrapper: `flex-1 h-full w-full`,
+  wrapper: `flex-1 h-full w-full top-14 right-3`,
 }
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
@@ -20,6 +22,16 @@ const Map = () => {
       center: [78.918, 26.262],
       zoom: 4.45,
     })
+
+    map.addControl(new mapboxgl.NavigationControl(),'top-right');
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions:{enableHighAccuracy:true},
+      trackUserLocation:true,
+      showUserHeading:true,
+      showAccuracyCircle:true,
+    }))
+
+  
 
     if (pickupCoordinates) {
       addToMap(map, pickupCoordinates)

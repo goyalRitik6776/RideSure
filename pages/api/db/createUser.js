@@ -8,6 +8,7 @@ const createUserInSanity = async (req, res) => {
       name: req.body.name,
       walletAddress: req.body.userWalletAddress,
     }
+  
 
     await client.createIfNotExists(userDoc)
 

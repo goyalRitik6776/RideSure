@@ -33,7 +33,8 @@ export const UberProvider = ({ children }) => {
     if (!pickupCoordinates || !dropoffCoordinates) return
     ;(async () => {
       try {
-        const response = await fetch('/api/map/getDuration', {
+        // const response = await fetch('/api/map/getDuration',{
+          const response = await fetch("api/map/getDuration",{
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ export const UberProvider = ({ children }) => {
 
         const data = await response.json()
         setBasePrice(Math.round(await data.data))
-      } catch (error) {
+       } catch (error) {
         console.error(error)
       }
     })()
@@ -71,16 +72,31 @@ export const UberProvider = ({ children }) => {
   const connectWallet = async () => {
     if (!window.ethereum) return
     try {
-      const addressArray = await window.ethereum.request({
-        method: 'eth_requestAccounts',
+      const response = await window.ethereum.request({
+        // method: 'eth_requestAccounts',
+          method: 'wallet_requestPermissions',
+         params: [{ 'eth_accounts': {},}]
       })
+
+      // console.log("REQUEST ->",response)
+
+      const getResponse = await window.ethereum.request({
+        method: 'wallet_getPermissions'
+      })
+      // console.log("GET ->",getResponse)
+      // console.log("GET ->",getResponse[0].caveats[0].value)
+
+      const addressArray = getResponse[0].caveats[0].value;
+
+      console.log(addressArray)
 
       if (addressArray.length > 0) {
         setCurrentAccount(addressArray[0])
         requestToCreateUserOnSanity(addressArray[0])
       }
     } catch (error) {
-      console.error(error)
+      const message = error.message || "";
+    console.log(error)
     }
   }
 
@@ -155,6 +171,7 @@ export const UberProvider = ({ children }) => {
       )
 
       const data = await response.json()
+      console.log("USER",data)
       setCurrentUser(data.data)
     } catch (error) {
       console.error(error)

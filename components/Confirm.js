@@ -1,8 +1,10 @@
 import RideSelector from './RideSelector'
-import { useContext } from 'react'
+import { useContext,useEffect } from 'react'
+import { useState } from 'react'
 import { UberContext } from '../context/uberContext'
 import { ethers } from 'ethers'
-
+import { serializeTransaction, TransactionDescription } from 'ethers/lib/utils'
+import Router, { useRouter } from 'next/router'
 const style = {
   wrapper: `flex-1 h-full flex flex-col justify-between`,
   rideSelectorContainer: `h-full flex flex-col overflow-scroll no-scrollbar`,
@@ -11,6 +13,11 @@ const style = {
 }
 
 const Confirm = () => {
+
+  const router = useRouter();
+
+  
+ 
   const {
     currentAccount,
     pickup,
@@ -21,6 +28,10 @@ const Confirm = () => {
     dropoffCoordinates,
     metamask,
   } = useContext(UberContext)
+
+
+
+ 
 
   const storeTripDetails = async (pickup, dropoff) => {
     try {
@@ -38,7 +49,9 @@ const Confirm = () => {
         }),
       })
 
-      await metamask.request({
+
+
+       const tx =  await metamask.request({
         method: 'eth_sendTransaction',
         params: [
           {
@@ -49,9 +62,20 @@ const Confirm = () => {
           },
         ],
       })
+
+      // console.log("SUCCESS")
+      router.push('/thanks')
+
     } catch (error) {
-      console.error(error)
+      if(error.code == '4001'){
+       router.push('/paymentFailed');
+        
+      }
+    
     }
+
+
+    
   }
 
   return (
@@ -65,7 +89,7 @@ const Confirm = () => {
             className={style.confirmButton}
             onClick={() => storeTripDetails(pickup, dropoff)}
           >
-            Confirm {selectedRide.service || 'UberX'}
+            Confirm {selectedRide.service || ' '}
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ const style = {
   title: `text-gray-500 text-center text-xs py-2 border-b`,
   car: `flex p-3 m-2 items-center border-2 border-white overflow-scroll no-scrollbar`,
   selectedCar: `border-2 border-black flex p-3 m-2 items-center `,
-  carList:`overflow-scroll no-scrollbar`,
+  carList:`overflow-scroll no-scrollbar cursor-pointer`,
   carImage: `h-14`,
   carDetails: `ml-2 flex-1`,
   service: `font-medium`,
@@ -22,7 +22,7 @@ const RideSelector = () => {
   const { selectedRide, setSelectedRide, setPrice, basePrice } =
     useContext(UberContext)
 
-  console.log(basePrice)
+  // console.log(basePrice)
 
   useEffect(() => {
     ;(async () => {
@@ -69,12 +69,17 @@ const RideSelector = () => {
               <div className={style.price}>
                 {((basePrice / 10 ** 5) * car.priceMultiplier).toFixed(5)}
               </div>
+
+              {/* {console.log(setPrice)} */}
+              {console.log(basePrice)}
+              {/* {console.log(price)} */}
               <Image src={ethLogo} height={25} width={40} />
             </div>
           </div>
         ))}
       </div>
     </div>
+    
   )
 }
 

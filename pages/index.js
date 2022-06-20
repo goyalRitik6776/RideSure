@@ -2,6 +2,8 @@ import Navbar from '../components/Navbar'
 import Map from '../components/Map'
 import LocationSelector from '../components/LocationSelector'
 import Confirm from '../components/Confirm'
+import { useContext,useEffect,useState } from 'react'
+import Router from "next/router";
 
 const style = {
   wrapper: `h-screen w-screen flex flex-col`,
@@ -12,18 +14,27 @@ const style = {
 }
 
 export default function Home() {
+
+  
+
+
   return (
+
+    
     <div className={style.wrapper}>
+      {/* {Comp()} */}
+
       <Navbar />
       <div className={style.main}>
         <Map />
       </div>
-      <div className={style.rideRequestContainer}>
+      {/* <div className={style.rideRequestContainer}>
         <div className={style.rideRequest}>
           <LocationSelector />
           <Confirm />
         </div>
-      </div>
+      </div> */}
+     
     </div>
   )
 }
