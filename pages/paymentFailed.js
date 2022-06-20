@@ -1,5 +1,4 @@
 import React from 'react'
-import img from '../assets/image.svg'
 import tick from '../assets/red-cross.png'
 import Image from 'next/image'
 import Link from "next/link";

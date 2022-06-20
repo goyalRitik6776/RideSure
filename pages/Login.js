@@ -4,7 +4,7 @@ import ethLogo from "../assets/metmask.png";
 import walletLogo from "../assets/walletconnect.png";
 import arrow from "../assets/arrow.png";
 import cb from "../assets/coinbase.png";
-import bg from "../assets/image.svg";
+
 import { UberContext } from "../context/uberContext";
 import { useContext } from "react";
 import { useEffect } from "react";
