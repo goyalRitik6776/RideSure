@@ -25,7 +25,7 @@ const RideSelector = () => {
   // console.log(basePrice)
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
         const response = await fetch('/api/db/getRideTypes')
 
@@ -74,7 +74,9 @@ const RideSelector = () => {
               {/* {console.log(setPrice)} */}
               {console.log(basePrice)}
               {/* {console.log(price)} */}
-              <Image src={ethLogo} height={25} width={40} />
+              <Image src={ethLogo}
+              alt=""
+               height={25} width={40} />
             </div>
           </div>
         ))}

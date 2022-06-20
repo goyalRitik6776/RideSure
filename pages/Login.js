@@ -141,7 +141,7 @@ const Login = () => {
         <div className={style.empty}></div>
         </div>
         <div className={style.footer}>
-          <div className={style.static}>Don't want to Login! </div>
+          <div className={style.static}>Don&#x27;t want to Login! </div>
           <Link href="/">
           <div className={style.download} >Click here to continue</div>
           </Link>
