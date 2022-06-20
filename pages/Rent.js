@@ -26,7 +26,8 @@ const Rent = () => {
             </div>
             <div className="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
                 {/* <img src="/images/illustrations/1.svg"/> */}
-                <Image src={img}></Image>
+                <Image src={img}
+                alt=""></Image>
             </div>
         </div>
     </div>

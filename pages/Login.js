@@ -69,6 +69,7 @@ const Login = () => {
          <div className={style.image}>
               <Image
                 src={ethLogo}
+                alt=""
                 className={style.img}
                 height={60}
                 width={60}
@@ -81,6 +82,7 @@ const Login = () => {
             <div className={style.arrow}>
               <Image
                 src={arrow}
+                alt=""
                 // className={style.img}
                 height={30}
                 width={30}
@@ -92,6 +94,7 @@ const Login = () => {
               <div className={style.image}>
                 <Image
                   src={walletLogo}
+                  alt=""
                   className={style.img}
                   height={60}
                   width={60}
@@ -104,6 +107,7 @@ const Login = () => {
               <div className={style.arrow}>
                 <Image
                   src={arrow}
+                  alt=""
                   // className={style.img}>
                   height={30}
                   width={30}
@@ -114,7 +118,9 @@ const Login = () => {
           <Link href="/ErrorLogin">
             <div className={style.coinBase}>
               <div className={style.image}>
-                <Image src={cb} className="rounded-full" height={60} width={60} />{" "}
+                <Image src={cb} 
+                alt=""
+                className="rounded-full" height={60} width={60} />{" "}
               </div>
               <div className={style.type}>
             <div className={style.typeName}>CoinBase</div>
@@ -123,6 +129,7 @@ const Login = () => {
               <div className={style.arrow}>
                 <Image
                   src={arrow}
+                  alt=""
                   // className={style.img}
                   height={30}
                   width={30}

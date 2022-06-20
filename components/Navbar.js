@@ -77,6 +77,7 @@ console.log("currentAccount",currentAccount)
         <div className={style.userImageContainer}>
           <Image
             className={style.userImage}
+            alt=""
             src={avatar}
             width={40}
             height={40}

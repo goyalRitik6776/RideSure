@@ -29,6 +29,7 @@ const thanks = () => {
         <div className={style.upperHalf}>
             <div className={style.tick}>
             <Image src={tick}
+            alt=""
             className={style.img}
             height={60}
             width={60}/> </div>

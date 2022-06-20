@@ -57,6 +57,7 @@ const RideSelector = () => {
           >
             <Image
               src={car.iconUrl}
+              alt=""
               className={style.carImage}
               height={50}
               width={50}

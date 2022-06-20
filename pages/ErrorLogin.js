@@ -4,7 +4,9 @@ import error from '../assets/altPay.svg'
 const Error = () => {
   return (
     <div className="bg-indigo-900 relative overflow-hidden h-screen">
-    <Image src={error} className="absolute h-full w-full object-cover"
+    <Image src={error} 
+    alt=""
+    className="absolute h-full w-full object-cover"
     layout='fill'/>
     <div className="inset-0 bg-black opacity-25 absolute">
     </div>
