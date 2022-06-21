@@ -26,7 +26,7 @@ const Confirm = () => {
     selectedRide,
     pickupCoordinates,
     dropoffCoordinates,
-    metamask,
+    metamask,setOrderStatus,
   } = useContext(UberContext)
 
 
@@ -64,11 +64,15 @@ const Confirm = () => {
       })
 
       // console.log("SUCCESS")
+      // setOrderStatus = true;
+      // console.log(tx)
+      setOrderStatus(tx)
       router.push('/thanks')
 
     } catch (error) {
       if(error.code == '4001'){
        router.push('/paymentFailed');
+          // router.push('/text')
         
       }
     

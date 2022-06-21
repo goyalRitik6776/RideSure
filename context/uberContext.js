@@ -5,6 +5,9 @@ export const UberContext = createContext()
 
 export const UberProvider = ({ children }) => {
   const [pickup, setPickup] = useState('')
+  const [isThere, setIsThere] = useState(false)
+  const [dark, setDark] = useState(false)
+  const [orderStatus, setOrderStatus] = useState('')
   const [dropoff, setDropoff] = useState('')
   const [pickupCoordinates, setPickupCoordinates] = useState()
   const [dropoffCoordinates, setDropoffCoordinates] = useState()
@@ -70,7 +73,7 @@ export const UberProvider = ({ children }) => {
   }
 
   const connectWallet = async () => {
-    if (!window.ethereum) return
+    if (!window.ethereum) return 
     try {
       const response = await window.ethereum.request({
         // method: 'eth_requestAccounts',
@@ -198,6 +201,11 @@ export const UberProvider = ({ children }) => {
         setPrice,
         basePrice,
         metamask,
+        isThere, 
+        setIsThere,
+        orderStatus, 
+        setOrderStatus,
+        dark,setDark,
       }}
     >
       {children}

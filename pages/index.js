@@ -5,6 +5,8 @@ import Confirm from '../components/Confirm'
 import { useContext,useEffect,useState } from 'react'
 import Router from "next/router";
 
+
+
 const style = {
   wrapper: `h-screen w-screen flex flex-col`,
   main: `h-full w-screen flex-1 z-10`,
