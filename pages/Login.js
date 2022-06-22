@@ -12,10 +12,7 @@ import Router, { useRouter } from "next/router";
 import Link from "next/link";
 // import { BsFullscreen } from "react-icons/bs";
 const style = {
-  // bg-[#e5e7eb]
-  // back:`absolute h-screen w-screen object-cover`,
-  // back:`absolute h-screen w-screen object-cover`,
-  // body:`relative overflow-hidden h-screen"`,
+ 
   body: `h-screen w-screen flex justify-center bg-gradient-to-r from-indigo-200 via-purple-300 to-pink-100 `,
   login: `w-[370px] h-[85vh] md:w-[450px] flex justify-center items-center my-10 flex-col rounded-2xl bg-[#eeeeee] mt-12`,
   // login:`flex justify-center items-center`,
@@ -42,28 +39,15 @@ const Login = () => {
   const { currentAccount, connectWallet, currentUser,setIsThere} =
   useContext(UberContext);
   const router = useRouter();
-  // let isMetamaskthere = true;
-
-  // useEffect(() => {
-  //   // Prefetch the dashboard page as the user will go there after the login
-  //   router.prefetch('/')
-  // }, [])
-
-  // let [metamask,setMetamask] = useState('false')
-
+ 
    useEffect(() => {
     if (typeof window.ethereum!=='undefined') {
       setIsThere(true)
     }
   }, []);
   const click = () => {
-   router.push('/metamask')
+   router.push('/metamask',"/login?method=metamask")
   };
-
-  // console.log(isMetamaskthere)
-
-
-
 
 
    {currentAccount ? (
@@ -106,7 +90,7 @@ const Login = () => {
               </div>
             </div>
          
-          <Link href="/ErrorLogin">
+          <Link href="/ErrorLogin" as='/error'>
             <div className={style.walletConnect}>
               <div className={style.image}>
                 <Image
@@ -132,7 +116,7 @@ const Login = () => {
               </div>
             </div>
           </Link>
-          <Link href="/ErrorLogin">
+          <Link href="/ErrorLogin" as='/error'>
             <div className={style.coinBase}>
               <div className={style.image}>
                 <Image src={cb} 

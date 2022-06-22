@@ -12,7 +12,7 @@ const style = {
     lowerHalf:`h-[35vh] flex-1 grid justify-items-center`,
     details:`font-mono px-3 text-xl text-center md:mt-3 md:mb-4 text-cyan-800 md:text-3xl text-bold`,
     // homeButton:`h-[6.5vh] text-center bg-black text-lg text-white px-4 py-2 rounded-2xl cursor-pointer hover:scale-110`,
-    homeButton:`w-[15vw] py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300`,
+    homeButton:`w-[25vw] md:w-[12vw] md:py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 `,
 }
 
 const paymentFailed = () => {
@@ -36,7 +36,7 @@ const paymentFailed = () => {
         </div>
         <div className={style.lowerHalf}>
             <div className={style.details}>Looks like your payment has failed.Please try again!</div>
-            <Link href="/Ride" replace>
+            <Link href="/Ride" as="/ride" replace>
             <div className={style.homeButton}>Back to Home</div></Link>
         </div>
         </div>

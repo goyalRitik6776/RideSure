@@ -14,10 +14,10 @@ const style = {
     lowerHalf:`h-[35vh] flex-1 grid justify-items-center`,
     details:`font-mono px-3 text-xl text-center md:mt-3 md:mb-4 text-cyan-800 md:text-3xl text-bold`,
     // homeButton:`h-[6.5vh] text-center bg-black text-lg text-white px-4 py-2 rounded-2xl cursor-pointer hover:scale-110`,
-    homeButton:`sm:w-[30vw] py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-cyan-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300`,
+    homeButton:`sm:w-[30vw] md:py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-cyan-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300 px-4 pt-3`,
 }
 
-const thanks = () => {
+const Thanks = () => {
 
   const {orderStatus} = useContext(UberContext);
 
@@ -62,4 +62,4 @@ const thanks = () => {
   )
 }
 
-export default thanks
+export default Thanks

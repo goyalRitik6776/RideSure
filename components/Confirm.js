@@ -3,7 +3,6 @@ import { useContext,useEffect } from 'react'
 import { useState } from 'react'
 import { UberContext } from '../context/uberContext'
 import { ethers } from 'ethers'
-import { serializeTransaction, TransactionDescription } from 'ethers/lib/utils'
 import Router, { useRouter } from 'next/router'
 const style = {
   wrapper: `flex-1 h-full flex flex-col justify-between`,
@@ -63,16 +62,15 @@ const Confirm = () => {
         ],
       })
 
-      // console.log("SUCCESS")
-      // setOrderStatus = true;
+
       // console.log(tx)
       setOrderStatus(tx)
-      router.push('/thanks')
+      // router.push('/thanks')
+      router.push("/thanks","/order?status=complete")
 
     } catch (error) {
       if(error.code == '4001'){
-       router.push('/paymentFailed');
-          // router.push('/text')
+       router.push('/paymentFailed',"/order?status=fail");
         
       }
     

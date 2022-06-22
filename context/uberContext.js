@@ -6,10 +6,13 @@ export const UberContext = createContext()
 export const UberProvider = ({ children }) => {
   const [pickup, setPickup] = useState('')
   const [isThere, setIsThere] = useState(false)
-  const [dark, setDark] = useState(false)
+  const [ride,setRide] = useState(false)
+  const [dark, setDark] = useState('drakosi/ckvcwq3rwdw4314o3i2ho8tph')
   const [orderStatus, setOrderStatus] = useState('')
   const [dropoff, setDropoff] = useState('')
   const [pickupCoordinates, setPickupCoordinates] = useState()
+  const [psuggestions, setpSuggestions] = useState([])
+  const [dsuggestions, setdSuggestions] = useState([])
   const [dropoffCoordinates, setDropoffCoordinates] = useState()
   const [currentAccount, setCurrentAccount] = useState()
   const [currentUser, setCurrentUser] = useState([])
@@ -51,7 +54,7 @@ export const UberProvider = ({ children }) => {
         const data = await response.json()
         setBasePrice(Math.round(await data.data))
        } catch (error) {
-        console.error(error)
+        // console.error(error)
       }
     })()
   }, [pickupCoordinates, dropoffCoordinates])
@@ -68,7 +71,7 @@ export const UberProvider = ({ children }) => {
         requestToCreateUserOnSanity(addressArray[0])
       }
     } catch (error) {
-      console.error(error)
+      // console.error(error)
     }
   }
 
@@ -91,7 +94,7 @@ export const UberProvider = ({ children }) => {
 
       const addressArray = getResponse[0].caveats[0].value;
 
-      console.log(addressArray)
+      // console.log(addressArray)
 
       if (addressArray.length > 0) {
         setCurrentAccount(addressArray[0])
@@ -99,14 +102,14 @@ export const UberProvider = ({ children }) => {
       }
     } catch (error) {
       const message = error.message || "";
-    console.log(error)
+    // console.log(error)
     }
   }
 
   const createLocationCoordinatePromise = (locationName, locationType) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('api/map/getLocationCoordinates', {
+        const response = await fetch('api/map/getLC2', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -118,36 +121,70 @@ export const UberProvider = ({ children }) => {
 
         const data = await response.json()
 
-        if (data.message === 'success') {
-          switch (locationType) {
-            case 'pickup':
-              setPickupCoordinates(data.data)
-              break
-            case 'dropoff':
-              setDropoffCoordinates(data.data)
-              break
-          }
+        // console.log(data);
+        
+        
+        if (data.message==='success') {
+          // if(locationType==='pickup'){
+            
+
+            switch (locationType) {
+              case 'pickup':{
+                if(pickup!=='' && data.data!=="undefined" &&  data.data.features.length>0)
+                setPickupCoordinates(data.data.features[0].center)
+                setpSuggestions(data.data.features)
+                // console.log("UC",suggestions)
+              }
+                break
+              case 'dropoff':{
+                if(dropoff!=='' && data.data!=="undefined" && data.data.features.length>0)
+                setDropoffCoordinates(data.data.features[0].center)
+                setdSuggestions(data.data.features)
+              }
+                break
+            }
+          // }
           resolve()
         } else {
           reject()
         }
       } catch (error) {
-        console.error(error)
-        reject()
+        console.error("FROM UC",error)
+        // reject()
       }
     })
   }
 
+  // useEffect(() => {
+  //   if (pickup && dropoff) {
+  //     ;(async () => {
+  //       await Promise.all([
+  //         createLocationCoordinatePromise(pickup, 'pickup'),
+  //         createLocationCoordinatePromise(dropoff, 'dropoff'),
+  //       ])
+  //     })()
+  //   } else return
+  // }, [pickup, dropoff])
+  
   useEffect(() => {
-    if (pickup && dropoff) {
+    if (pickup) {
       ;(async () => {
-        await Promise.all([
-          createLocationCoordinatePromise(pickup, 'pickup'),
-          createLocationCoordinatePromise(dropoff, 'dropoff'),
-        ])
+        { createLocationCoordinatePromise(pickup,'pickup') }
+
+        
       })()
     } else return
-  }, [pickup, dropoff])
+  }, [pickup])
+
+  useEffect(() => {
+    if (dropoff) {
+      ;(async () => {
+        { createLocationCoordinatePromise(dropoff,'dropoff') }
+
+        
+      })()
+    } else return
+  }, [dropoff])
 
   const requestToCreateUserOnSanity = async address => {
     if (!window.ethereum) return
@@ -163,7 +200,7 @@ export const UberProvider = ({ children }) => {
         }),
       })
     } catch (error) {
-      console.error(error)
+      // console.error(error)
     }
   }
 
@@ -174,10 +211,10 @@ export const UberProvider = ({ children }) => {
       )
 
       const data = await response.json()
-      console.log("USER",data)
+      // console.log("USER",data)
       setCurrentUser(data.data)
     } catch (error) {
-      console.error(error)
+      // console.error(error)
     }
   }
 
@@ -205,7 +242,9 @@ export const UberProvider = ({ children }) => {
         setIsThere,
         orderStatus, 
         setOrderStatus,
-        dark,setDark,
+        dark,setDark,ride,setRide,
+        psuggestions, setpSuggestions,dsuggestions, setdSuggestions,
+        
       }}
     >
       {children}

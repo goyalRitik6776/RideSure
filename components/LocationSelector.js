@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { useContext } from 'react'
 import { UberContext } from '../context/uberContext'
+import mapboxgl from 'mapbox-gl'
+import React from 'react';
+import ReactDOM from 'react-dom';
+// import { AddressAutofill } from '@mapbox/search-js-react';
+// import { MapboxAddressAutofill } from '@mapbox/search-js-core';
+// import { autofill } from '@mapbox/search-js-web';
+import InputField from './inputField';
+import useInput from "./useInput";
 
 const style = {
   wrapper: `pt-2 `,
@@ -16,6 +24,7 @@ const style = {
 const LocationSelector = () => {
   const [inFocus, setInFocus] = useState('from')
   const { pickup, setPickup, dropoff, setDropoff } = useContext(UberContext)
+  const address = useInput("");
 
   return (
     <div className={style.wrapper}>
@@ -37,13 +46,20 @@ const LocationSelector = () => {
               />
             </svg>
           </div>
+          {/* <AddressAutofill accessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN} > */}
+          {/* <MapboxAddressAutofill accessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}> */}
           <input
             className={style.input}
             placeholder='Enter pickup location'
+            // type="text"
+            // autoComplete="street-address"
             value={pickup}
             onChange={e => setPickup(e.target.value)}
+            
             onFocus={() => setInFocus('from')}
           />
+          {/* </MapboxAddressAutofill> */}
+          {/* </AddressAutofill> */}
         </div>
         <div className={style.verticalLine} />
         <div

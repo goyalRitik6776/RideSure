@@ -1,15 +1,15 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Map from '../components/Map'
-import LocationSelector from '../components/LocationSelector'
+// import LocationSelector from '../components/LocationSelector'
 import Confirm from '../components/Confirm'
-
+import LocationSelector from '../components/LS2'
 
 const style = {
-    wrapper: `h-screen w-screen flex flex-col`,
-    main: `h-full w-screen flex-1 z-10`,
+    wrapper: `h-screen w-screen flex flex-col `,
+    main: `h-full w-screen flex-1 z-10 `,
     mapContainer: `flex-1 w-full h-full`,
-    rideRequestContainer: `h-full w-[400px] ml-[1rem] py-[3rem] absolute top-7 left-5 flex flex-col justify-end z-10`,
+    rideRequestContainer: `h-full w-[400px] ml-[1rem] py-[3rem] absolute top-7 left-5 flex flex-col justify-end z-10 `,
     rideRequest: `h-full max-h-[700px] bg-white rounded-lg flex flex-col overflow-scroll no-scrollbar scale-95 `,
   }
 

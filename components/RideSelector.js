@@ -25,10 +25,9 @@ const RideSelector = () => {
   // console.log(basePrice)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       try {
         const response = await fetch('/api/db/getRideTypes')
-
         const data = await response.json()
         setCarList(data.data)
         setSelectedRide(data.data[0])

@@ -19,14 +19,16 @@ const Metamask = () => {
 
   const router = useRouter();
 
+    
+  {currentAccount ? (
+    router.push('/')
+   ):("")}
+
    useEffect(() => {
     // Prefetch the dashboard page as the user will go there after the login
     router.prefetch('/')
   }, [])
-  
-  {currentAccount ? (
-    router.push('/')
-   ):("")}
+
   
 
 
@@ -34,7 +36,7 @@ const Metamask = () => {
     <div className={style.wrapper1}>
         {isThere?(
            <div className={style.loginContainer}>
-           <Image src={img} width={200} height={200} />
+           <Image src={img} alt="logo" width={200} height={200} />
            <div
              className={style.walletConnectButton}
              onClick={() => connectWallet()}
@@ -45,7 +47,7 @@ const Metamask = () => {
          </div>
         ):(
           <div className={style.loginContainer}>
-          <Image src={img} width={200} height={200} />
+          <Image src={img} alt="logo" width={200} height={200} />
           {/* <div className={style.loginContent}> */}
             <div
             className={style.loginContent2}
