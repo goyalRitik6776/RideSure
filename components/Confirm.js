@@ -9,6 +9,7 @@ const style = {
   rideSelectorContainer: `h-full flex flex-col overflow-scroll no-scrollbar`,
   confirmButtonContainer: ` border-t-2 cursor-pointer z-10`,
   confirmButton: `bg-black text-white m-4 py-4 text-center text-xl`,
+  distanceContainer:` text-center py-2 border-y border-x border-black font-bold font-medium`,
 }
 
 const Confirm = () => {
@@ -25,7 +26,7 @@ const Confirm = () => {
     selectedRide,
     pickupCoordinates,
     dropoffCoordinates,
-    metamask,setOrderStatus,
+    metamask,setOrderStatus,distance
   } = useContext(UberContext)
 
 
@@ -85,6 +86,12 @@ const Confirm = () => {
       <div className={style.rideSelectorContainer}>
         {pickupCoordinates && dropoffCoordinates && <RideSelector />}
       </div>
+      {pickupCoordinates && dropoffCoordinates ?(
+         <div className={style.distanceContainer}>
+         Total Distance = {(distance[0]/1000).toFixed(2)} Kms , Estimated Time = {(distance[1]/60).toFixed(0)} mins
+      </div>
+      ):('')}
+     
       <div className={style.confirmButtonContainer}>
         <div className={style.confirmButtonContainer}>
           <div

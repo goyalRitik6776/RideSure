@@ -63,7 +63,8 @@ const RideSelector = () => {
             />
             <div className={style.carDetails}>
               <div className={style.service}>{car.service}</div>
-              <div className={style.time}>5 min away</div>
+              <div className={style.time}>{(car.priceMultiplier*4).toFixed(0)} Mins away</div>
+              {/* <div className={style.time}>{((basePrice/15) * car.priceMultiplier).toFixed(0)} Rs</div> */}
             </div>
             <div className={style.priceContainer}>
               <div className={style.price}>

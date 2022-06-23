@@ -18,6 +18,8 @@ export const UberProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState([])
   const [selectedRide, setSelectedRide] = useState([])
   const [price, setPrice] = useState()
+  const [route, setRoute] = useState()
+  const [distance, setDistance] = useState([])
   const [basePrice, setBasePrice] = useState()
 
   let metamask
@@ -58,6 +60,39 @@ export const UberProvider = ({ children }) => {
       }
     })()
   }, [pickupCoordinates, dropoffCoordinates])
+
+
+  //---------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    if (!pickupCoordinates || !dropoffCoordinates) return
+    ;(async () => {
+      try {
+        // const response = await fetch('/api/map/getDuration',{
+          const response = await fetch("api/map/getRoute",{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            pickupCoordinates: `${pickupCoordinates[0]},${pickupCoordinates[1]}`,
+            dropoffCoordinates: `${dropoffCoordinates[0]},${dropoffCoordinates[1]}`,
+          }),
+        })
+
+        const data = await response.json()
+        setDistance([data.data.distance,data.data.duration])
+        setRoute(data.data.geometry.coordinates)
+        // console.log("ROUTE",data.data.distance)
+       } catch (error) {
+        console.error(error)
+      }
+    })()
+  }, [pickupCoordinates, dropoffCoordinates])
+
+
+  //---------------------------------------------------------------------------------------
+
 
   const checkIfWalletIsConnected = async () => {
     if (!window.ethereum) return
@@ -240,8 +275,8 @@ export const UberProvider = ({ children }) => {
         metamask,
         isThere, 
         setIsThere,
-        orderStatus, 
-        setOrderStatus,
+        orderStatus, distance, setDistance,
+        setOrderStatus,route, setRoute,
         dark,setDark,ride,setRide,
         psuggestions, setpSuggestions,dsuggestions, setdSuggestions,
         
