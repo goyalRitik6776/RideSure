@@ -6,14 +6,14 @@ import { useContext,useEffect } from 'react';
 
 const style = {
     container:` w-full flex flex-col justify-center items-center relative overflow-hidden h-screen bg-gray-300 `,
-    boundary:`h-[70vh] pb-16 mt-6 border-6 border-slate-200 md:w-[35vw] md:h-[72vh] relative bg-white rounded-2xl shadow-2xl shadow-purple-500`,
-    upperHalf:`h-[40vh] grid justify-items-center flex-1 `,
+    boundary:`h-[70vh] pb-16 mt-6 border-6 border-slate-200 md:w-[460px] lg:w-[500px] md:h-[72vh] relative bg-white rounded-2xl shadow-2xl shadow-purple-500 scale-90 md:scale-100`,
+    upperHalf:`h-[40vh] grid justify-items-center flex-1`,
     tick:`mt-6`,
     heading:`font-mono text-6xl font-extrabold text-center my-2 uppercase`,
     lowerHalf:`h-[35vh] flex-1 grid justify-items-center`,
-    details:`font-mono px-3 text-xl text-center md:mb-4 text-cyan-800 md:text-3xl text-bold`,
+    details:`font-mono px-3 text-2xl text-center md:mb-4 text-cyan-800 md:text-3xl text-bold`,
 
-    homeButton:`sm:w-[30vw] md:py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-cyan-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300 px-4 pt-3`,
+    homeButton:`sm:w-[30vw] md:py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-cyan-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300 px-4 pt-2 md:pt-3 scale-90 md:scale-100 w-max`,
 }
 
 const Thanks = () => {

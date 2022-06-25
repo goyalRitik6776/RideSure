@@ -4,7 +4,7 @@ import { UberContext } from "../context/uberContext";
 import React from "react";
 
 const style = {
-  wrapper: `pt-2 `,
+  wrapper: `pt-2`,
   searchHeader: `w-full font-bold text-left flex items-center text-3xl p-4 pl-5 overflow-hidden h-[100px]`,
   inputBoxes: `flex flex-col mb-4 relative`,
   inputBox: `h-10 mx-4 border-2 bg-[#eeeeee] flex items-center my-1 py-1 px-2`,
@@ -12,7 +12,7 @@ const style = {
   svgContainer: `mx-1`,
   input: `my-2 rounded-2 p-2 outline-none border-none bg-transparent  h-full w-full`,
   verticalLine: `w-0 h-[2rem] border-black border absolute z-10 left-[2.3rem] top-[2rem]`,
-  //   suggestionsContainer:`bg-red-600  h-10 mx-4 border-2 my-1 py-1 px-2 z-20`,
+
   dropDown: `dropdown relative flex justify-center`,
   suggestionWrapper: `dropdown-menu absolute text-gray-700 pt-1 cursor-pointer z-20 px-4`,
   invisible: `invisible`,

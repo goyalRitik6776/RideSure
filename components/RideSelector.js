@@ -2,6 +2,7 @@ import Image from 'next/image'
 import ethLogo from '../assets/eth-logo.png'
 import { useEffect, useContext, useState } from 'react'
 import { UberContext } from '../context/uberContext'
+import auto from '../assets/rides/auto.jpeg'
 
 const style = {
   wrapper: `h-full flex flex-col overflow-auto no-scrollbar`,
