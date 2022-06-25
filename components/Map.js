@@ -2,19 +2,11 @@ import { useEffect, useContext } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { UberContext } from "../context/uberContext";
-// import polyline from "@mapbox/polyline";
-import markerImg from '../assets/marker.svg'
 
-{/* <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet"></link> */}
-// import Polyline
-// import MapBoxDirections from '@mapbox/mapbox-gl-directions'
-// var MapboxDirections = require('@mapbox/mapbox-gl-directions');
-// import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
-// import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 const style = {
-  wrapper: `flex-1 h-full w-full top-14 right-3`,
+  wrapper: `flex-1 h-full w-full top-14`,
 
-  // wrapper:``;
+
 };
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
@@ -26,16 +18,13 @@ const Map = () => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: "map",
-      // style: 'mapbox://styles/mapbox/rail-11',
-      // style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
+   
       style: `mapbox://styles/${dark}`,
       center: [78.918, 26.262],
       zoom: 4.45,
     });
 
-    // if(dark){
-    //   map.setStyle("mapbox://styles/goyalritik/cl4mzcklq000h14l8kzg1q06c")
-    // }
+ 
 
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
     map.addControl(
@@ -49,6 +38,7 @@ const Map = () => {
 
     if (pickupCoordinates) {
       addToMap(map, pickupCoordinates,"Origin");
+    
     }
 
     if (dropoffCoordinates) {
@@ -108,6 +98,7 @@ const Map = () => {
 
     
     }
+
 
 
 

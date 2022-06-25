@@ -1,5 +1,5 @@
 const getRoute = async (req, res) => {
-    const mapboxUrl = `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${req.body.pickupCoordinates};${req.body.dropoffCoordinates}?geometries=geojson&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
+    const mapboxUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${req.body.pickupCoordinates};${req.body.dropoffCoordinates}?geometries=geojson&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
   
     try {
       const response = await fetch(mapboxUrl)

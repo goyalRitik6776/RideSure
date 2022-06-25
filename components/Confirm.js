@@ -1,6 +1,5 @@
 import RideSelector from './RideSelector'
 import { useContext,useEffect } from 'react'
-import { useState } from 'react'
 import { UberContext } from '../context/uberContext'
 import { ethers } from 'ethers'
 import Router, { useRouter } from 'next/router'
@@ -9,7 +8,7 @@ const style = {
   rideSelectorContainer: `h-full flex flex-col overflow-scroll no-scrollbar`,
   confirmButtonContainer: ` border-t-2 cursor-pointer z-10`,
   confirmButton: `bg-black text-white m-4 py-4 text-center text-xl`,
-  distanceContainer:` text-center py-2 border-y border-x border-black font-bold font-medium`,
+  distanceContainer:` text-center py-2 border-t border-black font-bold font-medium`,
 }
 
 const Confirm = () => {
@@ -86,7 +85,7 @@ const Confirm = () => {
       <div className={style.rideSelectorContainer}>
         {pickupCoordinates && dropoffCoordinates && <RideSelector />}
       </div>
-      {pickupCoordinates && dropoffCoordinates ?(
+      {pickupCoordinates && dropoffCoordinates && distance ?(
          <div className={style.distanceContainer}>
          Total Distance = {(distance[0]/1000).toFixed(2)} Kms , Estimated Time = {(distance[1]/60).toFixed(0)} mins
       </div>

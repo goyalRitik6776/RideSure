@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import ethLogo from "../assets/metmask.png";
+import ethLogo from "../assets/metamask2.webp";
 import walletLogo from "../assets/walletconnect.png";
 import arrow from "../assets/arrow.png";
 import cb from "../assets/coinbase.png";
@@ -10,27 +10,25 @@ import { useContext } from "react";
 import { useEffect,useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
-// import { BsFullscreen } from "react-icons/bs";
 const style = {
  
   body: `h-screen w-screen flex justify-center bg-gradient-to-r from-indigo-200 via-purple-300 to-pink-100 `,
-  login: `w-[370px] h-[85vh] md:w-[450px] flex justify-center items-center my-10 flex-col rounded-2xl bg-[#eeeeee] mt-12`,
-  // login:`flex justify-center items-center`,
+  login: `w-[370px] h-[580px] md:w-[420px] flex justify-center items-center my-10 flex-col rounded-2xl bg-[#eeeeee] self-center`,
   heading: `font-mono font-extrabold text-4xl bg-white h-[140px] w-full flex  justify-center items-center rounded-t-2xl`,
-  options: `bg-white w-full h-[400px] flex flex-col justify-center items-center cursor-pointer`,
-  metaMask: `w-full flex flex-1 content-between border-b-2 border flex flex-row justify-between items-center self-stretch`,
-  walletConnect: `w-full flex flex-1 justify-between items-center border-b-2 border`,
-  coinBase: `w-full flex flex-1 justify-between items-center mb-10 border`,
+  options: `bg-white w-full h-[400px] flex flex-col justify-center items-center cursor-pointer `,
+  metaMask: `w-full flex flex-1 content-between border-b-2 border flex flex-row justify-between items-center self-stretch hover:bg-[#d7dbdc] transition ease-in duration-200`,
+  walletConnect: `w-full flex flex-1 justify-between items-center border-b-2 border hover:bg-[#d7dbdc] transition ease-in duration-200`,
+  coinBase: `w-full flex flex-1 justify-between items-center mb-10 border hover:bg-[#d7dbdc] transition ease-in duration-200`,
   image: `p-3 ml-4 flex justify-center `,
   img: ``,
   type: ` p-3 h-full flex flex-col justify-center font-bold text-lg`,
   typeAbout:`text-sm text-slate-400`,
   arrow: `p-2 mr-4 flex h-full items-center place-content-end`,
-  // footer: `bg-white text-lg w-full h-[100px] flex flex-row justify-center items-center border-t-4 border font-bold text-lg rounded-b-2xl`,
-  footer:` h-[90px] bg-white md:flex w-full text-center flex-row justify-center border-t-4 border font-bold rounded-b-2xl pt-2 md:pt-6`,
+ 
+  footer:` h-[90px] bg-white md:flex w-full text-center flex-row justify-center border-t-4 border font-bold rounded-b-2xl pt-2 md:pt-4`,
   static: `mr-2 text-lg`,
   download: `text-lg text-[#854ce6] hover:underline cursor-pointer`,
-  empty:`bg-white w-[5vw] underline`,
+  empty:`bg-white w-[3vw]  underline`,
   optionsContainer:`flex flex-row w-full`,
 };
 
@@ -90,7 +88,7 @@ const Login = () => {
               </div>
             </div>
          
-          <Link href="/ErrorLogin" as='/error'>
+          <Link href="/error" as='/error'>
             <div className={style.walletConnect}>
               <div className={style.image}>
                 <Image
@@ -116,7 +114,7 @@ const Login = () => {
               </div>
             </div>
           </Link>
-          <Link href="/ErrorLogin" as='/error'>
+          <Link href="/error" as='/error'>
             <div className={style.coinBase}>
               <div className={style.image}>
                 <Image src={cb} 

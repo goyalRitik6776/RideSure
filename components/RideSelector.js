@@ -7,7 +7,7 @@ const style = {
   wrapper: `h-full flex flex-col overflow-auto no-scrollbar`,
   title: `text-gray-500 text-center text-xs py-2 border-b`,
   car: `flex p-3 m-2 items-center border-2 border-white overflow-scroll no-scrollbar`,
-  selectedCar: `border-2 border-black flex p-3 m-2 items-center `,
+  selectedCar: `border-2 rounded-lg border-gray-400 flex p-3 m-2 items-center `,
   carList:`overflow-scroll no-scrollbar cursor-pointer`,
   carImage: `h-14`,
   carDetails: `ml-2 flex-1`,
@@ -64,7 +64,7 @@ const RideSelector = () => {
             <div className={style.carDetails}>
               <div className={style.service}>{car.service}</div>
               <div className={style.time}>{(car.priceMultiplier*4).toFixed(0)} Mins away</div>
-              {/* <div className={style.time}>{((basePrice/15) * car.priceMultiplier).toFixed(0)} Rs</div> */}
+            
             </div>
             <div className={style.priceContainer}>
               <div className={style.price}>
