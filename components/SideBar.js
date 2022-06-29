@@ -5,10 +5,10 @@ import { UberContext } from "../context/uberContext";
 const style = {
     wrapper:`'w-max absolute bg-white dark:bg-black top-0`,
     invisible:`invisible`,
-    option:`hover:text-gray-200 hover:bg-gray-100 flex items-center p-2 my-4 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-200 dark:text-gray-200 rounded-lg `,
+    option:`flex items-center p-2 my-4 border-2 rounded-lg`,
     active:`hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-800 dark:text-gray-100 rounded-lg bg-gray-100 dark:bg-gray-600`,
 }
-const SideBar = ({sidebar}) => {
+const SideBar = ({sidebar,setr,r}) => {
 
     const {currentAccount,connectWallet } = useContext(UberContext);
 
@@ -16,26 +16,26 @@ const SideBar = ({sidebar}) => {
   
 <div className={`${style.wrapper} ${sidebar===false && style.invisible}`}>
     <div className="flex flex-col sm:flex-row sm:justify-start">
-        <div className="w-56 h-screen">
+        <div className="w-max h-screen">
             <nav className="mt-4 px-6 ">
-            <div className=" text-3xl  text-white text-center border-b pb-3">
+            <div className=" text-4xl font-medium text-white text-start border-b pb-2 pl-6 mb-10">
                         Uber
                     </div>
-                <Link href='/ride'>
-                <a className={style.option} href="#">
+                {/* <Link href='/ride'> */}
+                <div className={style.option} onClick={()=>{setr(!r)}}>
                     <span className="mx-4 text-lg font-normal">
                         Ride
                     </span>
 
-                </a>
-                </Link>
+                </div>
+                {/* </Link> */}
                 <Link href='/rent'>
-                <a className={style.option} href="#">
+                <div className={style.option}>
                     <span className="mx-4 text-lg font-normal">
                         Rentals
                     </span>
 
-                </a>
+                </div>
                 </Link>
                 {currentAccount?(
                       <a className={style.option} href="#" >
@@ -44,12 +44,14 @@ const SideBar = ({sidebar}) => {
                       </span>
                   </a>
                 ):('')}
-              
-                <a className={style.option} href="#">
+                <Link href = '/contact'>
+
+                <div className={style.option}>
                     <span className="mx-4 text-lg font-normal">
                         Contact Us
                     </span>
-                </a>
+                </div>
+                </Link>
             </nav>
         </div>
     </div>

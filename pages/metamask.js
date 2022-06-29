@@ -24,10 +24,7 @@ const Metamask = () => {
     router.push('/')
    ):("")}
 
-   useEffect(() => {
-    // Prefetch the dashboard page as the user will go there after the login
-    router.prefetch('/')
-  }, [])
+
 
   
 

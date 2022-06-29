@@ -13,7 +13,7 @@ const style = {
     lowerHalf:`h-[35vh] flex-1 grid justify-items-center`,
     details:`font-mono px-3 text-2xl text-center md:mb-4 text-cyan-800 md:text-3xl text-bold`,
 
-    homeButton:`sm:w-[30vw] md:py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-cyan-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300 px-4 pt-2 md:pt-3 scale-90 md:scale-100 w-max`,
+    homeButton:`sm:w-[30vw] md:py-2 text-lg font-bold text-white  bg-cyan-500 rounded-full shadow-xl shadow-purple-200  text-center h-[6.5vh] cursor-pointer transition ease-in-out delay-150 bg-cyan-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300 px-4 pt-2 md:pt-2 scale-90 md:scale-100 w-max`,
 }
 
 const Thanks = () => {

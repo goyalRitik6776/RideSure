@@ -40,9 +40,17 @@ const Login = () => {
  
    useEffect(() => {
     if (typeof window.ethereum!=='undefined') {
-      setIsThere(true)
+      // const metamaskProvider = window.ethereum.providers.find((provider) => provider.isMetaMask);
+      // console.log(window.ethereum.isMetaMask);
+      setIsThere(window.ethereum.isMetaMask)
     }
   }, []);
+
+  // useEffect(async () => {
+  //   const provider = await detectEthereumProvider()
+  //   console.log(provider);
+  // }, []);
+
   const click = () => {
    router.push('/metamask',"/login?method=metamask")
   };

@@ -7,7 +7,7 @@ import { BsPerson } from "react-icons/bs";
 import { useContext, useEffect, useState } from "react";
 import { UberContext } from "../context/uberContext";
 import SideBar from "./SideBar";
-
+import { ethers } from "ethers";
 const style = {
   wrapper: `h-16 w-full bg-black text-white flex justify-between items-center md:px-32 fixed z-20 invisible lg:visible`,
 
@@ -27,23 +27,19 @@ const style = {
   suggestionWrapper: `dropdown-menu absolute text-white cursor-pointer z-20 w-max mt-3 ml-2`,
   invisible: `invisible`,
   suggestion: `bg-black  hover:bg-[#333333] py-1 px-4 border-b border-white`,
-  drop: `border-none`,
+  drop: `border-none rounded-b`,
 
-  smallLeft: `flex w-[40vw] justify-start items-center`,
-  smallRight: ` flex w-[70vw] justify-end items-center`,
+  smallLeft: `flex w-[45vw] justify-start items-center`,
+  smallRight: ` flex w-[55vw] justify-end items-center`,
   smallUserName: `text-lg text-white font-medium mr-2 cursor-pointer hover:bg-[#333333] px-4 py-1 rounded-full`,
   more: `text-lg text-white font-medium flex items-center mx-4 cursor-pointer px-4 py-1 flex-col mt-1`,
 };
 
-const Navbar = () => {
+const Navbar = ({ setr, r }) => {
   const [sidebar, setSidebar] = useState(false);
-  const toggle = () => {
-    if (sidebar) setSidebar(false);
-    else setSidebar(true);
-    console.log(sidebar);
-  };
   let {
     currentAccount,
+    wc,
     setCurrentAccount,
     connectWallet,
     currentUser,
@@ -60,33 +56,33 @@ const Navbar = () => {
       : setDark("drakosi/ckvcwq3rwdw4314o3i2ho8tph");
   };
 
-  const dropdown = () => {
-    if (drop) {
-      setDrop(false);
-    } else {
-      setDrop(true);
-    }
-  };
-
-  // console.log("Before Clicking", dark);
-
   return (
     <div>
       <div className="h-16 w-full bg-black text-white flex fixed justify-end z-20 lg:invisible">
         <div className={style.smallLeft}>
-          <button onClick={() => toggle()}>
+          {/* <button onClick={() => toggle()}> */}
+          <button
+            onClick={() => {
+              setSidebar(!sidebar);
+            }}
+          >
             <FaBars className="scale-150 mx-4" />
-            <SideBar sidebar={sidebar} />
+            <SideBar sidebar={sidebar} setr={setr} r={r} />
           </button>
           <Link href="/">
-            <div className="text-3xl text-white flex cursor-pointer ml-7 ">
+            <div className="text-3xl text-white flex cursor-pointer ml-1 ">
               Uber
             </div>
           </Link>
         </div>
         <div className={style.smallRight}>
           {currentAccount ? (
-            <div className="mr-2 cursor-pointer" onClick={() => dropdown()}>
+            <div
+              className="mr-2 cursor-pointer"
+              onClick={() => {
+                setDrop(!drop);
+              }}
+            >
               <Image
                 // className={style.userImage}
                 alt=""
@@ -118,25 +114,39 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="mr-2 cursor-pointer hover:scale-105">
+            <div className=" cursor-pointer hover:scale-105">
               <Link href="/login">
                 <Image
                   // className={style.userImage}
                   alt=""
                   src={avatar}
-                  width={40}
-                  height={40}
+                  width={35}
+                  height={35}
                 />
               </Link>
             </div>
           )}
 
-          <button
-            className="text-lg text-white font-medium mx-2 cursor-pointer hover:bg-[#333333] px-4 py-1  rounded-full"
-            onClick={() => darkMode()}
-          >
-            {dark === "drakosi/ckvcwq3rwdw4314o3i2ho8tph" ? "Dark" : "Light"}
-          </button>
+          <div className="w-max text-lg text-white font-medium flex-col items-center justify-center cursor-pointer  px-4 py-1 text-center ">
+          <div className="text-white font-normal">Dark</div>
+
+            <div className="relative inline-block w-10 mr-2 ml-2 align-middle select-none">
+              <input
+                type="checkbox"
+                name="toggle"
+                className="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                onChange={(e) => {
+                  e.target.checked
+                    ? setDark("goyalritik/cl4mzcklq000h14l8kzg1q06c")
+                    : setDark("drakosi/ckvcwq3rwdw4314o3i2ho8tph");
+                }}
+              />
+              <label
+                htmlFor="darkMode"
+                className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+              ></label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -146,24 +156,42 @@ const Navbar = () => {
             <div className={style.logo}>Uber</div>
           </Link>
 
-          <Link href="/ride">
-            <div className={style.menuItem}>Ride</div>
-          </Link>
+          {/* <Link href="/ride"> */}
+          <div
+            className={style.menuItem}
+            onClick={() => {
+              setr(!r);
+            }}
+          >
+            Ride
+          </div>
+          {/* </Link> */}
 
           <Link href="/rent">
             <div className={style.menuItem}>Rentals</div>
           </Link>
-          <div className={style.more} onClick={() => dropdown()}>
+          <div
+            className={style.more}
+            onClick={() => {
+              setDrop(!drop);
+            }}
+          >
             More
             <div className={style.dropDown}>
               <div
                 className={`${style.suggestionWrapper}
       ${drop === false && style.invisible}`}
               >
-                <div className={style.suggestion}>About Us</div>
+                <Link href="/contact">
+                  <div className={style.suggestion}>Contact Us</div>
+                </Link>
 
-                <div className={style.suggestion}>Contact Us</div>
-                <div className={`${style.suggestion} ${style.drop}`}>Help</div>
+                <div className={style.suggestion}>About Us</div>
+                <Link href="/contact">
+                  <div className={`${style.suggestion} ${style.drop}`}>
+                    Help
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -192,6 +220,7 @@ const Navbar = () => {
               height={40}
             />
           </div>
+
           {currentAccount ? (
             <div className={style.nameBox}>
               <div className={style.name}>
@@ -207,12 +236,25 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-
-          <button className={`${style.menuItem}`} onClick={() => darkMode()}>
-            {dark === "drakosi/ckvcwq3rwdw4314o3i2ho8tph"
-              ? "DarkMode"
-              : "LightMode"}
-          </button>
+          <div className="w-max text-lg text-white font-medium flex items-center cursor-pointer  px-4 py-1 rounded-full text-center">
+            <div className="relative inline-block w-10 mr-2 align-middle select-none">
+              <input
+                type="checkbox"
+                name="toggle"
+                className="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                onChange={(e) => {
+                  e.target.checked
+                    ? setDark("goyalritik/cl4mzcklq000h14l8kzg1q06c")
+                    : setDark("drakosi/ckvcwq3rwdw4314o3i2ho8tph");
+                }}
+              />
+              <label
+                htmlFor="darkMode"
+                className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+              ></label>
+            </div>
+            <span className="text-white font-medium">DarkMode</span>
+          </div>
         </div>
       </div>
     </div>

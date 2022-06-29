@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { faker } from '@faker-js/faker'
-
+import detectEthereumProvider from '@metamask/detect-provider'
 export const UberContext = createContext()
 
 export const UberProvider = ({ children }) => {
@@ -27,7 +27,6 @@ export const UberProvider = ({ children }) => {
   if (typeof window !== 'undefined') {
     metamask = window.ethereum
   }
-
   useEffect(() => {
     checkIfWalletIsConnected()
   }, [])
@@ -105,6 +104,8 @@ export const UberProvider = ({ children }) => {
         setCurrentAccount(addressArray[0])
         requestToCreateUserOnSanity(addressArray[0])
       }
+
+      console.log("UC",currentAccount)
     } catch (error) {
       // console.error(error)
     }
@@ -113,15 +114,27 @@ export const UberProvider = ({ children }) => {
   const connectWallet = async () => {
     if (!window.ethereum) return 
     try {
-      const response = await window.ethereum.request({
-        // method: 'eth_requestAccounts',
-          method: 'wallet_requestPermissions',
-         params: [{ 'eth_accounts': {},}]
-      })
+      
+      const provider = await detectEthereumProvider()
+      // console.log(provider)
+      const metamaskProvider = window.ethereum.providers.find((provider) => provider.isMetaMask);
+      // const coinbase = window.ethereum.providers.find((provider) => provider.isWalletLink);
+    
+      // console.log(metamaskProvider)
+     
+
+        const response = await metamaskProvider.request({
+          // method: 'eth_requestAccounts',
+            method: 'wallet_requestPermissions',
+           params: [{ 'eth_accounts': {},}]
+        })
+
+        // console.log("HELLOOO")
+      
 
       // console.log("REQUEST ->",response)
 
-      const getResponse = await window.ethereum.request({
+      const getResponse = await metamaskProvider.request({
         method: 'wallet_getPermissions'
       })
       // console.log("GET ->",getResponse)
@@ -137,9 +150,13 @@ export const UberProvider = ({ children }) => {
       }
     } catch (error) {
       const message = error.message || "";
-    // console.log(error)
+    console.log(error)
     }
   }
+
+  //--------------------------------------------WC--------------------------------------------------------------------
+  
+  //-----------------------------------------------------------------------------------------------------------------------
 
   const createLocationCoordinatePromise = (locationName, locationType) => {
     return new Promise(async (resolve, reject) => {
@@ -189,17 +206,6 @@ export const UberProvider = ({ children }) => {
       }
     })
   }
-
-  // useEffect(() => {
-  //   if (pickup && dropoff) {
-  //     ;(async () => {
-  //       await Promise.all([
-  //         createLocationCoordinatePromise(pickup, 'pickup'),
-  //         createLocationCoordinatePromise(dropoff, 'dropoff'),
-  //       ])
-  //     })()
-  //   } else return
-  // }, [pickup, dropoff])
   
   useEffect(() => {
     if (pickup) {
