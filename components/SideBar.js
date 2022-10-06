@@ -17,9 +17,9 @@ const SideBar = ({sidebar,setr,r}) => {
 <div className={`${style.wrapper} ${sidebar===false && style.invisible}`}>
     <div className="flex flex-col sm:flex-row sm:justify-start">
         <div className="w-max h-screen">
-            <nav className="mt-4 px-6 ">
-            <div className=" text-4xl font-medium text-white text-start border-b pb-2 pl-6 mb-10">
-                        Uber
+            <nav className="mt-4 pl-6 pr-8 ">
+            <div className=" text-3xl font-medium text-white text-start border-b pb-2 pl-5 pr-4 mb-10 font-serif">
+                        RideSure
                     </div>
                 {/* <Link href='/ride'> */}
                 <div className={style.option} onClick={()=>{setr(!r)}}>

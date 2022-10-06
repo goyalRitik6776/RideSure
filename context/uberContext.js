@@ -154,7 +154,7 @@ export const UberProvider = ({ children }) => {
     }
   }
 
-  //--------------------------------------------WC--------------------------------------------------------------------
+  //---------------------------------------------------------WC------------------------------------------------------------
   
   //-----------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +284,8 @@ export const UberProvider = ({ children }) => {
         orderStatus, distance, setDistance,
         setOrderStatus,route, setRoute,
         dark,setDark,ride,setRide,
-        psuggestions, setpSuggestions,dsuggestions, setdSuggestions,
+        psuggestions, setpSuggestions,
+        dsuggestions, setdSuggestions,
         
       }}
     >

@@ -65,7 +65,7 @@ const Contact = () => {
           </div>
         </div>
         <div className={style.formBox}>
-          <form action="/#" method="post"  className="flex-col">
+          <form action="/" method="post"  className="flex-col">
           <div className={style.formItems}>
                 <div className=" mt-8 text-start mx-4 px-2 font-mono pb-1">Your Name</div>
                 <div className={`${style.input} ${
