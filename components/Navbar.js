@@ -227,7 +227,7 @@ const Navbar = ({ setr, r }) => {
 
           <div className={`${currentUser.name && style.userName}`}>
             {/* {currentUser.name?.split(' ')[0]} */}
-            {currentAccount ? currentUser.name?.split(" ")[0] : ""}
+            {/* {currentAccount ? currentUser.name?.split(" ")[0] : ""} */}
           </div>
 
           <div className={style.userImageContainer}>
