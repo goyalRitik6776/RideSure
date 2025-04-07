@@ -11,7 +11,6 @@ import { useEffect,useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
 const style = {
- 
   body: `h-screen w-screen flex justify-center bg-gradient-to-r from-indigo-200 via-purple-300 to-pink-100 `,
   login: `w-[370px] h-[580px] md:w-[420px] flex justify-center items-center my-10 flex-col rounded-2xl bg-[#eeeeee] self-center`,
   heading: `font-mono font-extrabold text-4xl bg-white h-[140px] w-full flex  justify-center items-center rounded-t-2xl`,
