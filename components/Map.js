@@ -2,8 +2,6 @@ import { useEffect, useContext } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { UberContext } from "../context/uberContext";
-import icon from "/assets/red-cross.png";
-import ReactMapGL, { Marker } from "react-map-gl";
 const style = {
   wrapper: `flex-1 h-full w-full top-14`,
   marker: `bg-[url('../assets/red-cross.png')] w-[50px] h-[50px] cursor-pointer`,

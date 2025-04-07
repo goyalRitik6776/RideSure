@@ -28,7 +28,7 @@ const RideSelector = () => {
   useEffect(() => {
     ;(async () => {
       try {
-        const response = await fetch('/api/db/getRideTypes')
+        const response = await fetch('/api/db/getRideTypes');
         const data = await response.json()
         setCarList(data.data)
         setSelectedRide(data.data[0])

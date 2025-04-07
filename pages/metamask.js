@@ -18,16 +18,10 @@ const Metamask = () => {
   const {isThere,connectWallet,currentAccount} = useContext(UberContext);
 
   const router = useRouter();
-
-    
-  {currentAccount ? (
-    router.push('/')
-   ):("")}
-
-
-
   
-
+  {currentAccount ? (
+      router.push('/')
+   ):("")}
 
   return (
     <div className={style.wrapper1}>
@@ -60,8 +54,6 @@ const Metamask = () => {
             >
               Click here to download
             </a>
-            
-          {/* </div> */}
         </div>
         )}
     </div>

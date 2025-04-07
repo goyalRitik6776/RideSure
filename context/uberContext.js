@@ -20,7 +20,8 @@ export const UberProvider = ({ children }) => {
   const [price, setPrice] = useState()
   const [route, setRoute] = useState()
   const [distance, setDistance] = useState([])
-  const [basePrice, setBasePrice] = useState()
+  const [basePrice, setBasePrice] = useState();
+
 
   let metamask
 
@@ -112,47 +113,40 @@ export const UberProvider = ({ children }) => {
   }
 
   const connectWallet = async () => {
-    if (!window.ethereum) return 
+    if (!window.ethereum) {
+      console.log("No Ethereum provider found. Please install MetaMask.");
+      return;
+    }
+  
     try {
-      
-      const provider = await detectEthereumProvider()
-      // console.log(provider)
-      const metamaskProvider = window.ethereum.providers.find((provider) => provider.isMetaMask);
-      // const coinbase = window.ethereum.providers.find((provider) => provider.isWalletLink);
-    
-      // console.log(metamaskProvider)
-     
-
-        const response = await metamaskProvider.request({
-          // method: 'eth_requestAccounts',
-            method: 'wallet_requestPermissions',
-           params: [{ 'eth_accounts': {},}]
-        })
-
-        // console.log("HELLOOO")
-      
-
-      // console.log("REQUEST ->",response)
-
-      const getResponse = await metamaskProvider.request({
-        method: 'wallet_getPermissions'
-      })
-      // console.log("GET ->",getResponse)
-      // console.log("GET ->",getResponse[0].caveats[0].value)
-
-      const addressArray = getResponse[0].caveats[0].value;
-
-      // console.log(addressArray)
-
-      if (addressArray.length > 0) {
-        setCurrentAccount(addressArray[0])
-        requestToCreateUserOnSanity(addressArray[0])
+      const provider = window.ethereum;
+  
+      if (!provider.isMetaMask) {
+        console.log("Connected provider is not MetaMask.");
+        return;
+      }
+  
+      // Check if already connected
+      const accounts = await provider.request({ method: "eth_accounts" });
+  
+      if (accounts.length > 0) {
+        setCurrentAccount(accounts[0]);
+        requestToCreateUserOnSanity(accounts[0]);
+      } else {
+        // Request connection if not already connected
+        const newAccounts = await provider.request({
+          method: "eth_requestAccounts",
+        });
+        if (newAccounts.length > 0) {
+          setCurrentAccount(newAccounts[0]);
+          requestToCreateUserOnSanity(newAccounts[0]);
+        }
       }
     } catch (error) {
-      const message = error.message || "";
-    console.log(error)
+      const message = error.message || "An error occurred while connecting to the wallet.";
+      console.log("Error:", message, error);
     }
-  }
+  };
 
   //---------------------------------------------------------WC------------------------------------------------------------
   
@@ -251,8 +245,8 @@ export const UberProvider = ({ children }) => {
         `/api/db/getUserInfo?walletAddress=${walletAddress}`,
       )
 
-      const data = await response.json()
-      // console.log("USER",data)
+      const data = await response.json();
+
       setCurrentUser(data.data)
     } catch (error) {
       // console.error(error)

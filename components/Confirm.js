@@ -45,28 +45,43 @@ const Confirm = () => {
     distance,
   } = useContext(UberContext);
 
-  const storeTripDetails = async (pickup, dropoff) => {
-    try {
-      if (price <= 0) return;
-      console.log("HELLO");
-      const provider = await detectEthereumProvider();
-      const metamaskProvider = window.ethereum.providers.find(
-        (provider) => provider.isMetaMask
-      );
-      console.log(metamaskProvider);
-      const tx = await metamaskProvider.request({
-        method: "eth_sendTransaction",
-        params: [
-          {
-            from: currentAccount,
-            to: process.env.NEXT_PUBLIC_UBER_ADDRESS,
-            gas: "0x7EF40", // 520000 Gwei
-            value: ethers.utils.parseEther(price)._hex,
-          },
-        ],
-      });
 
-      setOrderStatus(tx);
+  
+
+  const storeTripDetails = async (pickup, dropoff) => {
+    console.log(';price',price);
+    
+    if (!price) return;
+    
+    if (!window.ethereum) {
+      console.log("No Ethereum provider found. Please install MetaMask.");
+      return;
+    }
+    
+    const metamaskProvider = window.ethereum;
+
+    if (!metamaskProvider.isMetaMask) {
+      console.log("Connected provider is not MetaMask.");
+      return;
+    }
+
+    
+    try {
+      const txParams = {
+        from: currentAccount, // The sender's address (active account)
+        to: process.env.NEXT_PUBLIC_UBER_ADDRESS, // Recipient address from env
+        gas: "0x5208", // 21,000 gas (standard for simple ETH transfers, adjust as needed)
+        value: ethers.utils.parseEther(price.toString())._hex, // Convert price to wei (hex)
+      };
+
+      const txHash = await metamaskProvider.request({
+        method: "eth_sendTransaction",
+        params: [txParams],
+      });
+  
+
+      setOrderStatus(txHash);
+
       await fetch("/api/db/saveTrips", {
         method: "POST",
         headers: {
@@ -80,10 +95,13 @@ const Confirm = () => {
           selectedRide: selectedRide,
         }),
       });
+
       router.push("/thanks", "/order?status=complete");
     } catch (error) {
+      console.log("error",error);
+      
       if (error.code == "4001") {
-        router.push("/paymentFailed", "/order?status=fail");
+        console.log('payment-failed')
       }
     }
   };

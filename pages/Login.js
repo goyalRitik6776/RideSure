@@ -33,9 +33,8 @@ const style = {
 };
 
 const Login = () => {
-  
-  const { currentAccount, connectWallet, currentUser,setIsThere} =
-  useContext(UberContext);
+  const { currentAccount, connectWallet, currentUser,setIsThere} = useContext(UberContext);
+
   const router = useRouter();
  
    useEffect(() => {
@@ -46,10 +45,6 @@ const Login = () => {
     }
   }, []);
 
-  // useEffect(async () => {
-  //   const provider = await detectEthereumProvider()
-  //   console.log(provider);
-  // }, []);
 
   const click = () => {
    router.push('/metamask',"/login?method=metamask")
@@ -62,13 +57,13 @@ const Login = () => {
 
   return (
     <div className={style.body} >
-
       <div className={style.login}>
         <div className={style.heading}>Login</div>
+
         <div className={style.optionsContainer}>
           <div className={style.empty}></div>
-        <div className={style.options}>
 
+        <div className={style.options}>
         <div className={style.metaMask} onClick={() => click()}>
             {/* <div className={style.metaMask}> */}
           
@@ -79,8 +74,9 @@ const Login = () => {
                   className={style.img}
                   height={60}
                   width={60}
-                />{" "}
+                />
               </div>
+              
               <div className={style.type}>
               <div className={style.typeName}>Metamask</div>
               <div className={style.typeAbout}>Connect using browser wallet</div>
@@ -154,7 +150,6 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      {/* Hello */}
     </div>
   );
 };

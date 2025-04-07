@@ -3,6 +3,7 @@ import Map from '../components/Map'
 import { useState } from 'react'
 import Confirm from '../components/Confirm'
 import LocationSelector from '../components/LocationSelector'
+
 const style = {
    wrapper: `h-screen w-screen flex flex-col `,
     main: `h-full w-screen flex-1 z-10 `,
@@ -12,24 +13,16 @@ const style = {
 }
 
 export default function Home() {
-  const [r,setr] = useState(false)
-
-  
-
+  const [r,setr] = useState(true);
 
   return (
-
-    
-
-    
     <div className={style.wrapper}>
-      {/* {Comp()} */}
-
-      {/* <Navbar /> */}
       <Navbar setr = {setr} r={r}/>
+
       <div className={style.main}>
         <Map />
       </div>
+
     {r?(
        <div className={style.rideRequestContainer}>
        <div className={style.rideRequest}>
@@ -37,11 +30,7 @@ export default function Home() {
          <Confirm />
        </div>
      </div>
-    ):("")}
-     
-
-
- 
+    ):null}
     </div>
   )
 }

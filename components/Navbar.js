@@ -217,13 +217,13 @@ const Navbar = ({ setr, r }) => {
         </div>
 
         <div className={style.rightMenu}>
-          {currentAccount ? (
+          {/* {currentAccount ? (
             <div className={style.menuItem} onClick={() => connectWallet()}>
               Switch Account
             </div>
           ) : (
             ""
-          )}
+          )} */}
 
           <div className={`${currentUser.name && style.userName}`}>
             {/* {currentUser.name?.split(' ')[0]} */}

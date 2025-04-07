@@ -46,7 +46,7 @@ const Thanks = () => {
             <a className={style.homeButton}
               target='_blank'
               rel='noreferrer'
-              href={`https://rinkeby.etherscan.io/tx/${orderStatus}`}
+              href={`https://sepolia.etherscan.io/tx/${orderStatus}`}
             >View Transactions details on Etherscan</a>
         </div>
         </div>

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { UberContext } from "../context/uberContext";
-import React from "react";
+import useDebounceQuery from "../hooks/useDebounceQuery";
 
 const style = {
   wrapper: `pt-2`,
@@ -24,8 +24,23 @@ const style = {
 
 const LocationSelector = () => {
   const [inFocus, setInFocus] = useState("from");
+  const [pickupVal, setPickupVal] = useState("");
+  const [dropoffVal, setDropoffVal] = useState("");
+
+  const {query:pickupQuery,debounceQuery:pickupDebounce}=useDebounceQuery();
+  const {query:dropoffQuery,debounceQuery:dropoffDebounce}=useDebounceQuery();
+
   const { pickup, setPickup, dropoff, setDropoff, psuggestions,setpSuggestions,dsuggestions,setdSuggestions } =
     useContext(UberContext);
+
+
+    useEffect(()=>{
+        setPickup(pickupQuery)
+    },[pickupQuery]);
+
+    useEffect(()=>{
+      setDropoff(dropoffQuery)
+  },[dropoffQuery])
 
   return (
     <div className={style.wrapper}>
@@ -52,14 +67,15 @@ const LocationSelector = () => {
             className={style.input}
             placeholder="Enter pickup location"
        
-            value={pickup}
-            onChange={(e) => setPickup(e.target.value)}
+            value={pickupVal}
+            onChange={(e) => {
+              setPickupVal(e.target.value);
+              pickupDebounce(e.target.value)
+            }}
             onFocus={() => {setInFocus("from")
             style.suggestionWrapper = "dropdown-menu absolute text-gray-700 pt-1 cursor-pointer z-20 px-4"}
              }
           />
-
-    
         </div>
 
         {psuggestions?.length > 0 && (
@@ -77,6 +93,7 @@ const LocationSelector = () => {
                     onClick={() => {
                       style.suggestionWrapper = "dropdown-menu absolute text-gray-700 pt-1 invisible cursor-pointer z-20 px-4"
                       setPickup(suggestion.place_name.split(',')[0]);
+                      setPickupVal(suggestion.place_name.split(',')[0]);
                       setpSuggestions([]);
                     }}
                     
@@ -107,8 +124,11 @@ const LocationSelector = () => {
           <input
             className={style.input}
             placeholder="Where to?"
-            value={dropoff}
-            onChange={(e) => setDropoff(e.target.value)}
+            value={dropoffVal}
+            onChange={(e) => {
+              setDropoffVal(e.target.value);
+              dropoffDebounce(e.target.value)
+            }}
             onFocus={() => {setInFocus("to")
             style.suggestionWrapperD = "dropdown-menu absolute text-gray-700 pt-1 cursor-pointer z-20 px-4"
             }}
@@ -133,6 +153,7 @@ const LocationSelector = () => {
                       style.suggestionWrapperD = "dropdown-menu absolute cursor-pointer text-gray-700 pt-1 invisible z-20 px-4"
 
                       setDropoff(suggestion.place_name.split(',')[0]);
+                      setDropoffVal(suggestion.place_name.split(',')[0]);
                       setdSuggestions([]);
                     }}
                   >
