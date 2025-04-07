@@ -29,8 +29,6 @@ const Contact = () => {
   const [inFocus, setInFocus] = useState("");
   const handleLogin = () =>{
     
-  
-
   }
 
   return (
