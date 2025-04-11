@@ -191,31 +191,10 @@ const Navbar = ({ setr, r }) => {
           <Link href="/rent">
             <div className={style.menuItem}>Rentals</div>
           </Link>
-          <div
-            className={style.more}
-            onClick={() => {
-              setDrop(!drop);
-            }}
-          >
-            More
-            <div className={style.dropDown}>
-              <div
-                className={`${style.suggestionWrapper}
-      ${drop === false && style.invisible}`}
-              >
-                <Link href="/contact">
-                  <div className={style.suggestion}>Contact Us</div>
-                </Link>
 
-                <div className={style.suggestion}>About Us</div>
-                <Link href="/contact">
-                  <div className={`${style.suggestion} ${style.drop}`}>
-                    Help
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
+          <Link href="/contact">
+            <div className={style.menuItem}>Contact Us</div>
+          </Link>
         </div>
 
         <div className={style.rightMenu}>

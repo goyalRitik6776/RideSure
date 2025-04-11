@@ -1,98 +1,109 @@
-import React from "react";
-import { useState } from "react";
-import { BsTelephoneFill,BsFillPersonFill } from "react-icons/bs";
+import React, { useState } from "react";
+import { BsTelephoneFill, BsFillPersonFill } from "react-icons/bs";
 import { IoMail } from "react-icons/io5";
 import { TiLocation } from "react-icons/ti";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
+
 const style = {
   wrapper: `h-screen w-screen bg-black flex justify-center items-center`,
-  formBoxOuter: `bg-[#02044a] w-[60vw] h-[550px] flex justify-center items-center rounded-2xl`,
-  details: `bg-[#02044a] flex-1 mr-[4vw] h-[70vh] ml-[4vw] flex-col hidden lg:block`,
-  header: ``,
-  topHeading: `text-white font-extrabold text-4xl mb-6 mt-2`,
-  topDetails: `text-[#8d8dba] mb-12`,
-  midDetails: ` h-[30vh] flex-col w-[250px] rounded-xl`,
-  item: ` h-[8vh] pt-2  hover:border-blue-600 border-2 border-[#02044a] mb-3 rounded-lg text-white cursor-pointer hover:transition ease-in duration-200 flex justify-start items-center pb-1`,
-  text: ``,
-  footer: ` mt-12 h-10 w-[250px] text-center text-white flex justify-around items-center`,
-  social: `text-white text-5xl rounded-full hover:bg-blue-600 p-3 cursor-pointer transition ease-in duration-200`,
-  formBox: `bg-white flex-1 mx-[3vw] h-[70vh] rounded-2xl flex-col justify-center text-center`,
-  formItems: `flex-col justify-start`,
-  input:`flex justify-start  items-center rounded-lg p-2 bg-transparent w-11/12 mx-4 border-2 border-slate-200`,
-  submitButton: `float-right mr-6 mt-4 py-3 px-12 rounded-xl bg-blue-600 cursor-pointer text-white font-mono transition ease-in duration-200 hover:bg-[#02044a] focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white text-base font-semibold shadow-md focus:ring-2 focus:ring-offset-2`,
-  focusedInputBox: `border-2 border-blue-600`,
-  focused:`text-blue-600`,
+  formBoxOuter: `bg-[#02044a] w-[80vw] md:w-[60vw] h-[600px] flex justify-between items-center rounded-2xl gap-15`,
+  details: `w-[50%] hidden lg:flex flex-col justify-between h-full p-10`,
+  topHeading: `text-white font-extrabold text-4xl mb-4`,
+  topDetails: `text-[#8d8dba] mb-8 text-sm leading-relaxed`,
+  item: `flex items-center gap-4 text-white border border-transparent hover:border-blue-600 px-4 py-3 rounded-lg mb-4 cursor-pointer transition`,
+  footer: `flex gap-10 mt-8 items-center`,
+  social: `text-white text-[40px] border border-white p-2 rounded-full hover:bg-blue-600 cursor-pointer transition`,
+  formBox: `bg-white w-full lg:w-[45%] p-8 h-full rounded-2xl lg:rounded-tl-0 rounded-bl-0 relative`,
+  formItems: `mb-4`,
+  input: `flex items-center border-2 border-slate-200 p-2 rounded-lg w-full focus-within:border-blue-600 transition`,
+  submitButton: `absolute bottom-10 left-10 right-10 mt-4 py-3 px-10 bg-blue-600 text-white rounded-xl hover:bg-[#02044a] transition`,
 };
 
 const Contact = () => {
   const [inFocus, setInFocus] = useState("");
-  const handleLogin = () =>{
-    
-  }
 
   return (
     <div className={style.wrapper}>
       <div className={style.formBoxOuter}>
         <div className={style.details}>
-          <div className={style.header}>
-            <div className={style.topHeading}>Having some issues</div>
-            <div className={style.topDetails}>
-              {" "}
-              Fill up the form and our Team will get back to you within 24 hours
+          <div>
+            <h2 className={style.topHeading}>Having some issues?</h2>
+            <p className={style.topDetails}>
+              Fill up the form and our team will get back to you within 24
+              hours.
+            </p>
+
+            <div>
+              <div className={style.item}>
+                <BsTelephoneFill className="text-blue-600 text-xl" />
+                +91 1234567890
+              </div>
+              <div
+                className={style.item}
+                role="presentation"
+                onClick={() => window.open(`mailto:goyalritik555.rg@gmail.com`)}
+              >
+                <IoMail className="text-blue-600 text-xl" />
+                goyalritik555.rg@gmail.com
+              </div>
+              <div className={style.item}>
+                <TiLocation className="text-blue-600 text-xl" />
+                Mumbai
+              </div>
             </div>
           </div>
-          <div className={style.midDetails}>
-            <div className={style.item}>
-              <BsTelephoneFill className="text-blue-600 mx-6 " />
-              <div className={style.text}>+91 1234567890</div>
-            </div>
-            <div className={style.item}>
-              <IoMail className="text-blue-600 mx-6" />
-              <div className={style.text}>12345@gmail.com</div>
-            </div>
-            <div className={style.item}>
-              <TiLocation className="text-blue-600 mx-6 text-xl" />
-              <div className={style.text}>Los Angeles</div>
-            </div>
-          </div>
+
           <div className={style.footer}>
             <FaFacebookF className={style.social} />
             <FiTwitter className={style.social} />
             <FaInstagram className={style.social} />
           </div>
         </div>
+
         <div className={style.formBox}>
-          <form action="/" method="post"  className="flex-col">
-          <div className={style.formItems}>
-                <div className=" mt-8 text-start mx-4 px-2 font-mono pb-1">Your Name</div>
-                <div className={`${style.input} ${
-            inFocus === "name" && style.focusedInputBox
-          }`}>
-                <BsFillPersonFill className={`mx-2 text-2xl ${inFocus === "name" && style.focused} `}/>
-              <input type="text" placeholder="" className="outline-none border-none  w-full" onFocus={() => {setInFocus("name")}} required></input>
-                </div>
-            </div>
+          <form className="space-y-4">
             <div className={style.formItems}>
-                <div className=" mt-4 text-start mx-4 px-2 font-mono pb-1">Email</div>
-                <div className={`${style.input} ${
-            inFocus === "email" && style.focusedInputBox
-          }`}>
-                <IoMail className={`mx-2 text-2xl ${inFocus === "email" && style.focused} `}/>
-              <input type="email" placeholder="" className="outline-none border-none w-full"
-              onFocus={() => {setInFocus("email")}} required></input>
-                </div>
+              <label className="block mb-1 text-sm">Your Name</label>
+              <div className={style.input}>
+                <BsFillPersonFill className="text-xl mr-2 text-blue-600" />
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  className="outline-none w-full"
+                  onFocus={() => setInFocus("name")}
+                  required
+                />
+              </div>
             </div>
+
             <div className={style.formItems}>
-                <div className=" mt-4 text-start mx-4 px-2 font-mono pb-1">Message</div>
-            
-              <textarea className={`${style.input} h-[160px] outline-none resize-none `} required></textarea>
-            
+              <label className="block mb-1 text-sm">Email</label>
+              <div className={style.input}>
+                <IoMail className="text-xl mr-2 text-blue-600" />
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="outline-none w-full"
+                  onFocus={() => setInFocus("email")}
+                  required
+                />
+              </div>
             </div>
-            
-          <input type='submit' value='Send Message' className={style.submitButton} onClick={handleLogin}/>
+
+            <div className={style.formItems}>
+              <label className="block mb-1 text-sm">Message</label>
+              <textarea
+                className="border-2 border-slate-200 p-2 rounded-lg w-full h-32 resize-none outline-none focus:border-blue-600 transition"
+                placeholder="Your message..."
+                required
+              />
+            </div>
+
+            <button type="submit" className={style.submitButton}>
+              Send Message
+            </button>
           </form>
-  
         </div>
       </div>
     </div>
