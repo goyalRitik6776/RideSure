@@ -13,7 +13,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import detectEthereumProvider from "@metamask/detect-provider";
 
 const style = {
-  wrapper: `flex-1 h-full flex flex-col justify-between`,
+  wrapper: `flex-1 h-full flex flex-col justify-between font-poppins`,
   rideSelectorContainer: `h-full flex flex-col overflow-scroll no-scrollbar`,
   confirmButtonContainer: ` border-t-2 cursor-pointer z-10`,
   confirmButton: `bg-black text-white m-4 py-4 text-center text-xl`,
@@ -45,19 +45,16 @@ const Confirm = () => {
     distance,
   } = useContext(UberContext);
 
-
-  
-
   const storeTripDetails = async (pickup, dropoff) => {
-    console.log(';price',price);
-    
+    console.log(";price", price);
+
     if (!price) return;
-    
+
     if (!window.ethereum) {
       console.log("No Ethereum provider found. Please install MetaMask.");
       return;
     }
-    
+
     const metamaskProvider = window.ethereum;
 
     if (!metamaskProvider.isMetaMask) {
@@ -65,7 +62,6 @@ const Confirm = () => {
       return;
     }
 
-    
     try {
       const txParams = {
         from: currentAccount, // The sender's address (active account)
@@ -78,7 +74,6 @@ const Confirm = () => {
         method: "eth_sendTransaction",
         params: [txParams],
       });
-  
 
       setOrderStatus(txHash);
 
@@ -98,10 +93,10 @@ const Confirm = () => {
 
       router.push("/thanks", "/order?status=complete");
     } catch (error) {
-      console.log("error",error);
-      
+      console.log("error", error);
+
       if (error.code == "4001") {
-        console.log('payment-failed')
+        console.log("payment-failed");
       }
     }
   };
@@ -140,36 +135,36 @@ const Confirm = () => {
             aria-describedby="alert-dialog-description"
           >
             <div className="w-[320px] h-[180px] bg-black">
-            <DialogTitle
-              id="alert-dialog-title"
-              className="text-2xl font-semibold font-sans text-center bg-black text-white"
-            >
-              {"Confirm Ride?"}
-            </DialogTitle>
-            <DialogContent className="bg-black">
-              <DialogContentText
-                id="alert-dialog-description"
-                className="text-white text-lg font-sans text-center"
+              <DialogTitle
+                id="alert-dialog-title"
+                className="text-2xl font-semibold text-center bg-black text-white"
               >
-                Please Log In to continue
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions className="bg-black pb-4 pr-4 justify-center">
-              <button
-                onClick={() => {
-                  router.push("/login");
-                }}
-                className="font-mono font-bold text-lg border-2 border-white text-blue-600 px-2 rounded-lg mr-2 hover:bg-slate-200 hover:text-black hover:transition ease-in duration-200 "
-              >
-                Log In
-              </button>
-              <button
-                onClick={handleClose}
-                className="font-mono font-bold text-lg border-2 border-white text-blue-600 px-2 rounded-lg hover:bg-slate-200 hover:text-black hover:transition ease-in duration-200 "
-              >
-                Close
-              </button>
-            </DialogActions>
+                {"Confirm Ride?"}
+              </DialogTitle>
+              <DialogContent className="bg-black">
+                <DialogContentText
+                  id="alert-dialog-description"
+                  className="text-white text-lg text-center"
+                >
+                  Please Log In to continue
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions className="bg-black pb-4 pr-4 justify-center">
+                <button
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                  className="font-bold text-lg border-2 border-white text-blue-600 px-3 py-0.5 rounded-lg mr-2 hover:bg-slate-200 hover:text-black hover:transition ease-in duration-200 "
+                >
+                  Log In
+                </button>
+                <button
+                  onClick={handleClose}
+                  className="font-bold text-lg border-2 border-white text-blue-600 px-3 py-0.5 rounded-lg hover:bg-slate-200 hover:text-black hover:transition ease-in duration-200 "
+                >
+                  Close
+                </button>
+              </DialogActions>
             </div>
           </Dialog>
         </div>
