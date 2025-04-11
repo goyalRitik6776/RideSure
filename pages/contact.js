@@ -17,11 +17,40 @@ const style = {
   formBox: `bg-white w-full lg:w-[45%] p-8 h-full rounded-2xl lg:rounded-tl-0 rounded-bl-0 relative`,
   formItems: `mb-4`,
   input: `flex items-center border-2 border-slate-200 p-2 rounded-lg w-full focus-within:border-blue-600 transition`,
-  submitButton: `absolute bottom-10 left-10 right-10 mt-4 py-3 px-10 bg-blue-600 text-white rounded-xl hover:bg-[#02044a] transition`,
+  submitButton: `w-full py-3 px-10 bg-blue-600 text-white rounded-xl hover:bg-[#02044a] transition`,
 };
 
 const Contact = () => {
-  const [inFocus, setInFocus] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.status === 200) {
+        setValues({ name: "", email: "", message: "" });
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={style.wrapper}>
@@ -62,7 +91,7 @@ const Contact = () => {
         </div>
 
         <div className={style.formBox}>
-          <form className="space-y-4">
+          <div className="space-y-4">
             <div className={style.formItems}>
               <label className="block mb-1 text-sm">Your Name</label>
               <div className={style.input}>
@@ -71,8 +100,11 @@ const Contact = () => {
                   type="text"
                   placeholder="Enter your name"
                   className="outline-none w-full"
-                  onFocus={() => setInFocus("name")}
                   required
+                  value={values.name}
+                  onChange={(e) =>
+                    setValues((p) => ({ ...p, name: e.target.value }))
+                  }
                 />
               </div>
             </div>
@@ -85,8 +117,11 @@ const Contact = () => {
                   type="email"
                   placeholder="Enter your email"
                   className="outline-none w-full"
-                  onFocus={() => setInFocus("email")}
                   required
+                  value={values.email}
+                  onChange={(e) =>
+                    setValues((p) => ({ ...p, email: e.target.value }))
+                  }
                 />
               </div>
             </div>
@@ -97,13 +132,25 @@ const Contact = () => {
                 className="border-2 border-slate-200 p-2 rounded-lg w-full h-32 resize-none outline-none focus:border-blue-600 transition"
                 placeholder="Your message..."
                 required
+                value={values.message}
+                onChange={(e) =>
+                  setValues((p) => ({ ...p, message: e.target.value }))
+                }
               />
             </div>
 
-            <button type="submit" className={style.submitButton}>
-              Send Message
-            </button>
-          </form>
+            <div className="absolute bottom-10 left-10 right-10">
+              {showToast ? (
+                <div className="text-blue-600 font-bold text-lg mb-4">
+                  Message Sent Successfully!
+                </div>
+              ) : null}
+
+              <button className={style.submitButton} onClick={handleSubmit}>
+                Send Message
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
