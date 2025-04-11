@@ -3,7 +3,7 @@ import Map from "../components/Map";
 import { useState } from "react";
 import Confirm from "../components/Confirm";
 import LocationSelector from "../components/LocationSelector";
-
+import Head from "next/head";
 const style = {
   wrapper: `h-screen w-screen flex flex-col `,
   main: `h-full w-screen flex-1 z-10 `,
@@ -17,6 +17,19 @@ export default function Home() {
 
   return (
     <div className={style.wrapper}>
+      <Head>
+        <title>Ridesure</title>
+        <meta name="description" content="Web3 based cab booking platform." />
+        <meta name="author" content="Ritik Goyal" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="Ridesure" />
+        <meta
+          property="og:description"
+          content="Web3 based cab booking platform."
+        />
+        <meta property="og:type" content="website" />
+      </Head>
+
       <Navbar setr={setr} r={r} />
 
       <div className={style.main}>
