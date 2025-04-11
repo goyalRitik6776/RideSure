@@ -71,10 +71,12 @@ const Contact = () => {
               <div
                 className={style.item}
                 role="presentation"
-                onClick={() => window.open(`mailto:goyalritik555.rg@gmail.com`)}
+                onClick={() =>
+                  window.open(`mailto:${process.env.NEXT_PUBLIC_MY_EMAIL}`)
+                }
               >
                 <IoMail className="text-blue-600 text-xl" />
-                goyalritik555.rg@gmail.com
+                {process.env.NEXT_PUBLIC_MY_EMAIL}
               </div>
               <div className={style.item}>
                 <TiLocation className="text-blue-600 text-xl" />
